@@ -72,14 +72,16 @@ pytest tests/ -v
 
 ## Deploy on Render
 
-1. **Connect repo** – In [Render](https://render.com): New → Web Service (or Blueprint), connect your Git repo.
-2. **Root Directory** – Set **Root Directory** to `permitting_agent` (the folder that contains `app.py`, `requirements.txt`, `render.yaml`).
-3. **Build / Start** – Render will use:
+Repo: [github.com/permitagent/Permitting-Agent](https://github.com/permitagent/Permitting-Agent)
+
+1. **Connect repo** – In [Render](https://render.com): New → Web Service (or Blueprint), connect **Permitting-Agent** repo.
+2. **Root Directory** – Leave **blank** (this repo root is the permitting agent).
+3. **Build / Start** – Render will use `render.yaml` or set manually:
    - **Build:** `pip install -r requirements.txt && pip install -e .`
    - **Start:** `gunicorn -w 1 -b 0.0.0.0:$PORT app:app`
-4. **Blueprint (optional)** – If you use Blueprint, point it at the same repo and Root Directory `permitting_agent`; it will read `render.yaml` and create the web service.
+4. **Blueprint** – New → Blueprint, connect this repo; it will read `render.yaml` and create the web service.
 
-The deployed app serves a JSON status at `/`, health at `/health`, and lists jurisdiction adapters at `/adapters`. CLI workflows (intake, document-review, etc.) are intended for local or worker use; you can add API routes later that call the same modules.
+The deployed app serves JSON at `/`, `/health`, and `/adapters`. CLI workflows are for local or worker use.
 
 ## License
 
