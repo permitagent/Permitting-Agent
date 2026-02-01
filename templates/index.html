@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <h1>Permitting + Site Acquisition</h1>
+    <p class="hero-sub">Small cell & fiber. Intake, document review, portal research, and outreach—in one place.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Start a new case</h2>
+    {% if error %}
+    <p class="form-error">{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('create_case') }}" method="post" class="card form-card">
+      <div class="form-group">
+        <label for="jurisdiction">Jurisdiction</label>
+        <input type="text" id="jurisdiction" name="jurisdiction" required
+               placeholder="e.g. City of Sample"
+               value="{{ request.form.get('jurisdiction', '') }}">
+      </div>
+      <div class="form-group">
+        <label for="address">Site address</label>
+        <input type="text" id="address" name="address" required
+               placeholder="e.g. 123 Main St"
+               value="{{ request.form.get('address', '') }}">
+      </div>
+      <div class="form-group">
+        <label for="scope">Scope of work</label>
+        <select id="scope" name="scope">
+          <option value="small_cell" {{ 'selected' if request.form.get('scope') == 'small_cell' else '' }}>Small cell</option>
+          <option value="fiber" {{ 'selected' if request.form.get('scope') == 'fiber' else '' }}>Fiber</option>
+          <option value="both" {{ 'selected' if request.form.get('scope') == 'both' else '' }}>Both</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Create case</button>
+    </form>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>What you can do</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Document review</h3>
+        <p>Upload PDFs or Word docs. We extract key fields, compare to the jurisdiction checklist, and output a “What’s needed” report with citations.</p>
+      </div>
+      <div class="card">
+        <h3>Portal research</h3>
+        <p>We pull permit requirements, fees, submittal formats, and portal links from official jurisdiction pages and store sources with timestamps.</p>
+      </div>
+      <div class="card">
+        <h3>Outreach</h3>
+        <p>Discover planning, engineering, ROW, and clerk contacts from official sources and generate outreach email drafts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

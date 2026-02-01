@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Jurisdictions{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1>Supported jurisdictions</h1>
+    <p>These jurisdictions have checklists, portal research, and contact discovery configured.</p>
+    <ul class="adapter-list">
+      {% for adapter_id in adapters %}
+      <li><code>{{ adapter_id }}</code></li>
+      {% else %}
+      <li>None registered yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

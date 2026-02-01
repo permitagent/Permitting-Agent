@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Case created{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="card success-card">
+      <h1>Case created</h1>
+      <p class="case-id">Case ID: <code>{{ case_id }}</code></p>
+      <p>Jurisdiction: <strong>{{ jurisdiction }}</strong><br>
+         Address: <strong>{{ address }}</strong><br>
+         Scope: <strong>{{ scope }}</strong></p>
+      <p class="next-steps">Next: run document review (upload docs against the checklist) or portal research for this jurisdiction.</p>
+      <a href="{{ url_for('index') }}" class="btn btn-primary">Start another case</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
