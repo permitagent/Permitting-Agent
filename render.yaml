@@ -1,0 +1,16 @@
+# Render Blueprint: Permitting + Site Acquisition Agent
+# In Render dashboard: New → Blueprint (or Web Service), connect repo, set Root Directory to "permitting_agent"
+services:
+  - type: web
+    name: permitting-agent
+    env: python
+    buildCommand: pip install -r requirements.txt && pip install -e .
+    startCommand: gunicorn -w 1 -b 0.0.0.0:$PORT app:app
+    envVars:
+      - key: PORT
+        generateValue: false
+      # Optional: add later for portal credentials, etc.
+      # - key: PORTAL_USER
+      #   sync: false
+      # - key: PORTAL_PASSWORD
+      #   sync: false

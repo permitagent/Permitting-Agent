@@ -1,0 +1,21 @@
+# Permitting Agent - production dependencies
+flask>=3.0
+gunicorn>=21.0
+pydantic>=2.0
+pydantic-settings>=2.0
+typer[all]>=0.9
+playwright>=1.40
+pypdf>=3.0
+python-docx>=1.0
+httpx>=0.25
+robotexclusionrulesparser>=1.7
+structlog>=23.0
+rich>=13.0
+
+# Optional: sample PDF with text (for E2E)
+# fpdf2>=2.0
+
+# Dev
+pytest>=7.0
+pytest-cov>=4.0
+pytest-asyncio>=0.21

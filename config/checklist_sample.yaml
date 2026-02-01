@@ -1,0 +1,19 @@
+# Sample checklist for City of Sample (small_cell)
+jurisdiction: City of Sample
+scope: small_cell
+items:
+  - id: app_form
+    label: Permit application form
+    required: true
+    description: Signed application form
+    typical_format: PDF
+  - id: site_plan
+    label: Site plan
+    required: true
+    description: Site plan showing proposed location
+    typical_format: PDF
+  - id: fee
+    label: Application fee
+    required: true
+    description: Non-refundable fee
+    typical_format: Check or online payment

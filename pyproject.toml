@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "permitting-agent"
+version = "0.1.0"
+description = "Permitting + Site Acquisition agent for telecom (small cell + fiber)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Permitting Agent" }]
+dependencies = [
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "typer[all]>=0.9",
+    "playwright>=1.40",
+    "pypdf>=3.0",
+    "python-docx>=1.0",
+    "httpx>=0.25",
+    "robotexclusionrulesparser>=1.7",
+    "structlog>=23.0",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov>=4.0", "pytest-asyncio>=0.21"]
+
+[project.scripts]
+permitting = "permitting_agent.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]
