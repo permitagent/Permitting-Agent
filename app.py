@@ -1,7 +1,14 @@
 """Flask app for Permitting Agent: web UI + API for SaaS."""
 
 import os
+import sys
 from pathlib import Path
+
+# Add src so permitting_agent is importable when not installed (e.g. Render, python app.py)
+_root = Path(__file__).resolve().parent
+_src = _root / "src"
+if _src.exists() and str(_src) not in sys.path:
+    sys.path.insert(0, str(_src))
 
 from flask import Flask, jsonify, render_template, request, redirect, url_for
 
