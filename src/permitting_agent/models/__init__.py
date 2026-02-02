@@ -10,6 +10,8 @@ from permitting_agent.models.document import (
     ExtractedField,
     DocumentArtifact,
     ChecklistItem,
+    Checklist,
+    GapItem,
     WhatsNeededReport,
     Citation,
 )
