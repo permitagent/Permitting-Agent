@@ -11,25 +11,19 @@
       <h3>Portal</h3>
       <p><strong>URL:</strong> {{ portal_url }}</p>
       <p><strong>Login:</strong> {{ username or '(you’ll log in when we open the portal)' }}</p>
-      <h3>Application information</h3>
-      <p><strong>Applicant:</strong> {{ applicant_name }}</p>
-      <p><strong>Jurisdiction:</strong> {{ jurisdiction }}</p>
-      <p><strong>Site address:</strong> {{ address }}</p>
-      <p><strong>Scope:</strong> {{ scope }}</p>
-      {% if contact_email %}<p><strong>Contact email:</strong> {{ contact_email }}</p>{% endif %}
-      {% if contact_phone %}<p><strong>Contact phone:</strong> {{ contact_phone }}</p>{% endif %}
+      <h3>Application information (from crawled page)</h3>
+      {% for name, value in application_fields %}
+      <p><strong>{{ name }}</strong>: {{ value or '(empty)' }}</p>
+      {% endfor %}
     </div>
     <form action="{{ url_for('submit_online_run') }}" method="post" class="form-actions">
       <input type="hidden" name="portal_url" value="{{ portal_url }}">
       <input type="hidden" name="username" value="{{ username }}">
       <input type="hidden" name="password" value="{{ password }}">
-      <input type="hidden" name="applicant_name" value="{{ applicant_name }}">
-      <input type="hidden" name="jurisdiction" value="{{ jurisdiction }}">
-      <input type="hidden" name="address" value="{{ address }}">
-      <input type="hidden" name="scope" value="{{ scope }}">
-      <input type="hidden" name="contact_email" value="{{ contact_email }}">
-      <input type="hidden" name="contact_phone" value="{{ contact_phone }}">
-      <a href="{{ url_for('submit_online_start') }}" class="btn btn-secondary">← Back</a>
+      {% for name, value in application_fields %}
+      <input type="hidden" name="field_{{ name }}" value="{{ value or '' }}">
+      {% endfor %}
+      <a href="{{ url_for('submit_online_fields') }}" class="btn btn-secondary">← Back</a>
       <button type="submit" class="btn btn-primary">Start submission (approve each step)</button>
     </form>
   </div>

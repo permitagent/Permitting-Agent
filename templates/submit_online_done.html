@@ -1,12 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Submission started{% endblock %}
+{% block title %}Submission flow ready{% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
     <div class="card success-card">
       <h1>Submission flow ready</h1>
-      <p>We’ve recorded your application details for <strong>{{ applicant_name }}</strong> at <strong>{{ jurisdiction }}</strong> ({{ address }}).</p>
+      <p>We’ve recorded your application data for the portal at <strong>{{ portal_url }}</strong>.</p>
+      <h3>Information we’ll use to fill the application</h3>
+      <ul class="field-list">
+        {% for name, value in application_fields %}
+        <li><strong>{{ name }}</strong>: {{ value or '(empty)' }}</li>
+        {% endfor %}
+      </ul>
       <p>In a full deployment, we would open the portal, log in, and fill each step—asking you to approve each step before submitting. You can run bulk applications the same way: we’d repeat this flow for each application with your approval at each step.</p>
       <p class="next-steps">For now, use the portal manually with the information above, or try “Fill out an application” to extract and reuse data from a PDF or Word form.</p>
       <a href="{{ url_for('index') }}" class="btn btn-primary">Back to home</a>

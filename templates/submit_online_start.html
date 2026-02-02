@@ -10,7 +10,7 @@
     {% if error %}
     <p class="form-error">{{ error }}</p>
     {% endif %}
-    <form action="{{ url_for('submit_online_info') }}" method="post" class="card form-card">
+    <form action="{{ url_for('submit_online_crawl') }}" method="post" class="card form-card">
       <div class="form-group">
         <label for="portal_url">Portal website URL</label>
         <input type="url" id="portal_url" name="portal_url" required
@@ -28,7 +28,7 @@
         <input type="password" id="password" name="password" autocomplete="current-password"
                placeholder="Your portal password (stored only for this session)">
       </div>
-      <p class="form-hint">We’ll request the information needed to submit next. You approve each step before anything is submitted.</p>
+      <p class="form-hint">We’ll crawl the application page to find what information you need to provide, then ask you to fill it. You approve each step before anything is submitted.</p>
       <button type="submit" class="btn btn-primary">Continue →</button>
     </form>
   </div>

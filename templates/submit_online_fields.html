@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Information we need{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <p class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> → <a href="{{ url_for('submit_online_start') }}">Submit online</a> → Information we need</p>
+    <h1>Information we need to submit</h1>
+    {% if crawled %}
+    <p class="section-sub">We crawled the application page at <strong>{{ portal_url }}</strong> and found the following fields. Enter the information below; we’ll use it to fill the application (you approve each step before anything is submitted).</p>
+    {% else %}
+    <p class="section-sub">We couldn’t read the form from the application page (or the page didn’t have a form). Here are common fields you may need. Fill them and we’ll use this when you submit (you approve each step).</p>
+    {% endif %}
+    {% if error %}
+    <p class="form-error">{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('submit_online_review') }}" method="post" class="card form-card">
+      <input type="hidden" name="portal_url" value="{{ portal_url or '' }}">
+      <input type="hidden" name="username" value="{{ username or '' }}">
+      <input type="hidden" name="password" value="{{ password or '' }}">
+      {% for field in fields %}
+      <div class="form-group">
+        <label for="field_{{ field.name }}">{{ field.label }}{% if field.required %} *{% endif %}</label>
+        {% if field.type == 'textarea' or field.name|lower in ['comments', 'notes', 'description'] %}
+        <textarea id="field_{{ field.name }}" name="field_{{ field.name }}" rows="3" placeholder="{{ field.placeholder or '' }}">{{ field.value or '' }}</textarea>
+        {% else %}
+        <input type="{{ field.type if field.type in ['email', 'tel', 'number', 'url'] else 'text' }}"
+               id="field_{{ field.name }}" name="field_{{ field.name }}"
+               value="{{ field.value or '' }}" placeholder="{{ field.placeholder or '' }}"
+               {% if field.required %}required{% endif %}>
+        {% endif %}
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Review and submit →</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
