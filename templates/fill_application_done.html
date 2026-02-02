@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Application data ready{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="card success-card">
+      <h1>Application data ready</h1>
+      {% if action == 'use_for_submission' %}
+      <p>We’ve saved the information you entered. Use it to submit an online application.</p>
+      <a href="{{ url_for('submit_online_start') }}" class="btn btn-primary">Go to Submit online application →</a>
+      <p class="form-hint">Your filled data will be available to pre-fill the portal (in a full deployment).</p>
+      {% else %}
+      <p>Your application data has been prepared. Download it below or use “Submit online application” to submit it.</p>
+      <a href="{{ url_for('index') }}" class="btn btn-primary">Back to home</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

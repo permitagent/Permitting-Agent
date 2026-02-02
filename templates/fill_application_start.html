@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Fill out an application{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <p class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> → Fill out an application</p>
+    <h1>Fill out an application</h1>
+    <p class="section-sub">Upload a PDF or Word form, or paste the URL of an application form. We’ll read it and ask you to enter or confirm the information, then put that onto the application.</p>
+    {% if error %}
+    <p class="form-error">{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('fill_application_parse') }}" method="post" enctype="multipart/form-data" class="card form-card">
+      <div class="form-group">
+        <label for="form_url">Form URL (optional)</label>
+        <input type="url" id="form_url" name="form_url"
+               placeholder="https://example.gov/application-form.pdf"
+               value="{{ request.form.get('form_url', '') }}">
+      </div>
+      <p class="form-divider">— or upload a file —</p>
+      <div class="form-group">
+        <label for="form_file">Upload PDF or Word document</label>
+        <input type="file" id="form_file" name="form_file" accept=".pdf,.doc,.docx">
+      </div>
+      <p class="form-hint">We’ll extract fields from the form and show them for you to fill or edit. Then you can use this data for online submission or download it.</p>
+      <button type="submit" class="btn btn-primary">Read form and continue →</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

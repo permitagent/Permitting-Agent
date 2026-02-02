@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Submit online application{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <p class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> → Submit online application</p>
+    <h1>Submit an online application</h1>
+    <p class="section-sub">Step 1: Enter the portal website and your login. We’ll use this to submit applications (you approve each step).</p>
+    {% if error %}
+    <p class="form-error">{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('submit_online_info') }}" method="post" class="card form-card">
+      <div class="form-group">
+        <label for="portal_url">Portal website URL</label>
+        <input type="url" id="portal_url" name="portal_url" required
+               placeholder="https://permits.example.gov"
+               value="{{ request.form.get('portal_url', '') }}">
+      </div>
+      <div class="form-group">
+        <label for="username">Login / Username</label>
+        <input type="text" id="username" name="username" autocomplete="username"
+               placeholder="Your portal username"
+               value="{{ request.form.get('username', '') }}">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password"
+               placeholder="Your portal password (stored only for this session)">
+      </div>
+      <p class="form-hint">We’ll request the information needed to submit next. You approve each step before anything is submitted.</p>
+      <button type="submit" class="btn btn-primary">Continue →</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

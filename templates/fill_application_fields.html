@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Enter application information{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <p class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> → <a href="{{ url_for('fill_application_start') }}">Fill out application</a> → Enter information</p>
+    <h1>Enter application information</h1>
+    <p class="section-sub">We read your form. Fill or edit the fields below. Then we’ll put this information onto the application (or you can use it for online submission).</p>
+    {% if error %}
+    <p class="form-error">{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('fill_application_done') }}" method="post" class="card form-card">
+      {% for field in fields %}
+      <div class="form-group">
+        <label for="field_{{ field.name }}">{{ field.label }}</label>
+        <input type="text" id="field_{{ field.name }}" name="field_{{ field.name }}"
+               value="{{ field.value or '' }}" placeholder="{{ field.placeholder or '' }}">
+      </div>
+      {% endfor %}
+      <div class="form-actions">
+        <button type="submit" name="action" value="use_for_submission" class="btn btn-primary">Use for online submission →</button>
+        <button type="submit" name="action" value="download" class="btn btn-secondary">Download as JSON</button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}
